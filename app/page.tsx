@@ -11,9 +11,6 @@ export default function Home() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // -----------------------------
-      // INTRO ANIMATION
-      // -----------------------------
 
       gsap.set(
         [
@@ -65,33 +62,22 @@ intro
       // CAR SCROLL ANIMATION
       // -----------------------------
 
-      const car = document.querySelector(
-        ".hero-car"
-      ) as HTMLElement | null;
+      // CAR SCROLL ANIMATION
+gsap.to(".hero-car", {
+  x: () => {
+    const car = document.querySelector(".hero-car") as HTMLElement;
 
-      if (car) {
-        gsap.to(car, {
-          x: () => {
-            const carWidth = car.getBoundingClientRect().width;
-
-            return Math.max(
-              0,
-              window.innerWidth - carWidth - 40
-            );
-          },
-
-          ease: "none",
-
-          scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "+=1000",
-            scrub: 1,
-            invalidateOnRefresh: true,
-          },
-        });
-      }
-
+    return window.innerWidth - car.offsetWidth - 40;
+  },
+  ease: "none",
+  scrollTrigger: {
+    trigger: "#hero",
+    start: "top top",
+    end: "+=1000",
+    scrub: true,
+    invalidateOnRefresh: true,
+  },
+});
       // -----------------------------
       // SCROLL PROGRESS
       // -----------------------------
